@@ -12,6 +12,6 @@ public class Patient
     
     [MaxLength(100)]
     public string LastName { get; set; }
-    public DateTime Birthdate { get; set; }
+    public DateOnly Birthdate { get; set; }
     public ICollection<Prescription> Prescription { get; set; }
 }
