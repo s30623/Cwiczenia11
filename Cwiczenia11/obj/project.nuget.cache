@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "+OWAFBeh8Gk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nicea\\RiderProjects\\Cwiczenia11\\Cwiczenia11\\Cwiczenia11.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nicea\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "C:\\Users\\nicea\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
