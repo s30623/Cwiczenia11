@@ -1,4 +1,6 @@
-﻿using Cwiczenia11.Services;
+﻿using Cwiczenia11.Data;
+using Cwiczenia11.DTOs;
+using Cwiczenia11.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cwiczenia11.Controllers;
@@ -14,10 +16,10 @@ public class MedicamentController : ControllerBase
         _dbService = dbService;
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Get()
+    [HttpPost]
+    public async Task<IActionResult> GetPatientInfo(PatientDTO patient)
     {
-        var patientInfo = _dbService.getPatientInfo();
+        var patientInfo = await _dbService.getPatientInfo(patient);
         return Ok(patientInfo);
     }
 }

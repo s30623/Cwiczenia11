@@ -1,8 +1,9 @@
-﻿using Cwiczenia11.DTOs;
+﻿using Cwiczenia11.Data;
+using Cwiczenia11.DTOs;
 
 namespace Cwiczenia11.Services;
 
 public interface IDbService
 {
-    Task<List<PatientDTO>> getPatientInfo();
+    Task<List<PatientDTO>> getPatientInfo(PatientDTO patient);
 }
