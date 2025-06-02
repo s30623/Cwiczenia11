@@ -1,5 +1,6 @@
 ﻿using Cwiczenia11.Data;
 using Cwiczenia11.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Cwiczenia11.Services;
 
@@ -15,6 +16,7 @@ public class DbService : IDbService
     public Task<List<PatientDTO>> getPatientInfo()
     {
         //var patientInfo = await _context.Patients;
-        throw new NotImplementedException();
+        var result = new List<PatientDTO>();
+        return Task.FromResult(result);
     }
 }

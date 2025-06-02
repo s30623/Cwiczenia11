@@ -14,7 +14,7 @@ public class MedicamentController : ControllerBase
         _dbService = dbService;
     }
 
-    [HttpGet]
+    [HttpPut]
     public async Task<IActionResult> Get()
     {
         var patientInfo = _dbService.getPatientInfo();

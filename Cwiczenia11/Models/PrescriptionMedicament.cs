@@ -7,11 +7,9 @@ namespace Cwiczenia11.Data;
 [Table("Prescription_Medicament")]
 public class PrescriptionMedicament
 {
-    [Key]
     [ForeignKey(nameof(Medicament))]
     public int IdMedicament { get; set; }
     
-    [Key]
     [ForeignKey(nameof(Prescription))]
     public int IdPrescription { get; set; }
     
