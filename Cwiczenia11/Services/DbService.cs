@@ -16,26 +16,28 @@ public class DbService : IDbService
 
     public Task<List<PatientDTO>> getPatientInfo(PatientDTO patient)
     {
-        var patientInfo = _context.Patients.Select(e => new PatientDTO
+        var patientInfo = _context.Patients.Where(p => p.IdPatient == patient.IdPatient)
+            .Select(e => new PatientDTO
         {
             FirstName = e.FirstName,
-            IdPatient = patient.IdPatient,
-            Prescriptions = e.Prescription.Select(a => new PrescriptionsDTO()
+            IdPatient = e.IdPatient,
+            Prescriptions = e.Prescription.OrderBy(o => o.DueDate)
+                .Select(a => new PrescriptionsDTO()
             {
                 IdPrescription = a.IdPrescription,
                 Date = a.Date,
                 DueDate = a.DueDate,
-                Doctor = new DoctorDTO
+                Doctor = _context.Doctors.Where(d => d.IdDoctor == a.IdDoctor).Select(d => new DoctorDTO
                 {
-                    FirstName = e.FirstName,
-                    IdDoctor = a.IdDoctor,
-                },
-                Medicaments = _context.Medicaments.Select(m => new MedicamentsDTO()
+                    IdDoctor = d.IdDoctor,
+                    FirstName = d.FirstName
+                }).FirstOrDefault(),
+                Medicaments = _context.PrescriptionMedicaments.Where(m => m.IdPrescription == a.IdPrescription).Select(m => new MedicamentsDTO
                 {
                     IdMedicament = m.IdMedicament,
-                    Name = m.Name,
-                    Description = m.Description,
-                    Dose = 10
+                    Name = _context.Medicaments.Where(mm => mm.IdMedicament == m.IdMedicament).Select((mm => mm.Name)).FirstOrDefault(),
+                    Description = _context.Medicaments.Where(dd => m.IdMedicament == dd.IdMedicament).Select((dd => dd.Description)).FirstOrDefault(),
+                    Dose = m.Dose ?? 0
                 }).ToList()
                 
                 
