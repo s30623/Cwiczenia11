@@ -68,7 +68,7 @@ public class DbService : IDbService
 
     public Task<bool> checkDrugNumber(PatientRequestDTO patient)
     {
-        if (patient.medicaments.Count > _drugNumber)
+        if (patient.medicaments?.Count > _drugNumber)
         {
             throw new InvalidOperationException($"Przekroczono dopuszczalną liczbę leków: {_drugNumber}");
         }
