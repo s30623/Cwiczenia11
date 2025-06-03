@@ -23,6 +23,8 @@ public class MedicamentController : ControllerBase
         {
             _dbService.createPatient(patient);
         }
+
+        await _dbService.checkDrugNumber(patient);
         var patientInfo = await _dbService.getPatientInfo(patient);
         
         return Ok(patientInfo);

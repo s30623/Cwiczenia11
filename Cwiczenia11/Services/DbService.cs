@@ -8,6 +8,7 @@ namespace Cwiczenia11.Services;
 public class DbService : IDbService
 {
     private readonly DatabaseContext _context;
+    private readonly int _drugNumber = 10;
 
     public DbService(DatabaseContext context)
     {
@@ -64,4 +65,15 @@ public class DbService : IDbService
         await _context.SaveChangesAsync();
         return true;
     }
+
+    public Task<bool> checkDrugNumber(PatientDTO patient)
+    {
+        if (patient.Prescriptions.Count > _drugNumber)
+        {
+            throw new InvalidOperationException($"Przekroczono dopuszczalną liczbę leków: {_drugNumber}");
+        }
+
+        return Task.FromResult(true);
+    }
+
 }
