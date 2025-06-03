@@ -25,6 +25,7 @@ public class MedicamentController : ControllerBase
         }
 
         await _dbService.checkDrugNumber(patient);
+        await _dbService.checkDrugsExists(patient);
         var patientInfo = await _dbService.getPatientInfo(patient);
         
         return Ok(patientInfo);

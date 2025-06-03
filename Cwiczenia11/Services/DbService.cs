@@ -76,4 +76,15 @@ public class DbService : IDbService
         return Task.FromResult(true);
     }
 
+    public async Task<bool> checkDrugsExists(PatientDTO patient)
+    {
+        foreach (var medicament in patient.Prescriptions[0].Medicaments)
+        {
+            if (!await _context.Medicaments.AnyAsync(m => m.IdMedicament == medicament.IdMedicament))
+            {
+                throw new Exception($"Podany lek o id: {medicament.IdMedicament} nie istnieje");
+            } 
+        }
+        return true;
+    }
 }

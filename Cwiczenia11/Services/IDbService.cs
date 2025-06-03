@@ -9,4 +9,5 @@ public interface IDbService
     Task<Boolean> patientExists(PatientDTO patient);
     Task<Boolean> createPatient(PatientDTO patient);
     Task<Boolean> checkDrugNumber(PatientDTO patient);
+    Task<Boolean> checkDrugsExists(PatientDTO patient);
 }
