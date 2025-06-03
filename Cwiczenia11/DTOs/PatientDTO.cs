@@ -9,6 +9,16 @@ public class PatientDTO
     public List<PrescriptionsDTO> Prescriptions { get; set; }
 }
 
+public class PatientRequestDTO
+{
+    public int IdPatient { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateOnly Birthdate { get; set; }
+    public List<MedicamentsDTO> medicaments { get; set; }
+    public DateOnly Date{get;set;}
+    public DateOnly DueDate{get;set;}
+}
 public class PrescriptionsDTO
 {
     public int IdPrescription { get; set; }

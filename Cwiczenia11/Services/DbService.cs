@@ -15,7 +15,7 @@ public class DbService : IDbService
         _context = context;
     }
 
-    public async Task<List<PatientDTO>> getPatientInfo(PatientDTO patient)
+    public async Task<List<PatientDTO>> getPatientInfo(PatientRequestDTO patient)
     {
         var patientInfo = await _context.Patients.Where(p => p.IdPatient == patient.IdPatient)
             .Select(e => new PatientDTO
@@ -47,12 +47,12 @@ public class DbService : IDbService
         return patientInfo;
     }
 
-    public async Task<bool> patientExists(PatientDTO patient)
+    public async Task<bool> patientExists(PatientRequestDTO patient)
     {
         return await _context.Patients.AnyAsync(p => p.IdPatient == patient.IdPatient);
     }
 
-    public async Task<bool> createPatient(PatientDTO patient)
+    public async Task<bool> createPatient(PatientRequestDTO patient)
     {
         var createPatient = new Patient
         {
@@ -66,9 +66,9 @@ public class DbService : IDbService
         return true;
     }
 
-    public Task<bool> checkDrugNumber(PatientDTO patient)
+    public Task<bool> checkDrugNumber(PatientRequestDTO patient)
     {
-        if (patient.Prescriptions.Count > _drugNumber)
+        if (patient.medicaments.Count > _drugNumber)
         {
             throw new InvalidOperationException($"Przekroczono dopuszczalną liczbę leków: {_drugNumber}");
         }
@@ -76,9 +76,9 @@ public class DbService : IDbService
         return Task.FromResult(true);
     }
 
-    public async Task<bool> checkDrugsExists(PatientDTO patient)
+    public async Task<bool> checkDrugsExists(PatientRequestDTO patient)
     {
-        foreach (var medicament in patient.Prescriptions[0].Medicaments)
+        foreach (var medicament in patient.medicaments)
         {
             if (!await _context.Medicaments.AnyAsync(m => m.IdMedicament == medicament.IdMedicament))
             {
