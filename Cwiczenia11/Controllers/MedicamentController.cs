@@ -19,7 +19,12 @@ public class MedicamentController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> GetPatientInfo(PatientDTO patient)
     {
+        if (!await _dbService.patientExists(patient))
+        {
+            _dbService.createPatient(patient);
+        }
         var patientInfo = await _dbService.getPatientInfo(patient);
+        
         return Ok(patientInfo);
     }
 }

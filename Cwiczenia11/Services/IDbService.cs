@@ -6,4 +6,6 @@ namespace Cwiczenia11.Services;
 public interface IDbService
 {
     Task<List<PatientDTO>> getPatientInfo(PatientDTO patient);
+    Task<Boolean> patientExists(PatientDTO patient);
+    Task<Boolean> createPatient(PatientDTO patient);
 }

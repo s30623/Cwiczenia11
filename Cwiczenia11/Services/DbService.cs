@@ -14,9 +14,9 @@ public class DbService : IDbService
         _context = context;
     }
 
-    public Task<List<PatientDTO>> getPatientInfo(PatientDTO patient)
+    public async Task<List<PatientDTO>> getPatientInfo(PatientDTO patient)
     {
-        var patientInfo = _context.Patients.Where(p => p.IdPatient == patient.IdPatient)
+        var patientInfo = await _context.Patients.Where(p => p.IdPatient == patient.IdPatient)
             .Select(e => new PatientDTO
         {
             FirstName = e.FirstName,
@@ -44,5 +44,24 @@ public class DbService : IDbService
             }).ToList()
         }).ToListAsync();
         return patientInfo;
+    }
+
+    public async Task<bool> patientExists(PatientDTO patient)
+    {
+        return await _context.Patients.AnyAsync(p => p.IdPatient == patient.IdPatient);
+    }
+
+    public async Task<bool> createPatient(PatientDTO patient)
+    {
+        var createPatient = new Patient
+        {
+            FirstName = patient.FirstName,
+            LastName = patient.LastName,
+            IdPatient = patient.IdPatient,
+            Birthdate = patient.Birthdate,
+        };
+        _context.Patients.Add(createPatient);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
